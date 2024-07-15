@@ -17,7 +17,10 @@
                             <div>
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
-                                    <h3 class="fw-bold">{{ __('Register') }}</h3>
+                                    <div class="text-center mb-4">
+                                        <img src="{{asset('image/oxford-logo.jpg')}}" alt="oxford-logo" width="50">
+                                    </div>
+                                    <h3 class="sec-title">{{ __('Register') }}</h3>
 
                                     <div class="row mb-3">
                                         <label for="name" class="col-md-4 col-form-label ">{{ __('Name') }}</label>
@@ -71,7 +74,7 @@
             
                                     <div class="row mb-0">
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="submit" class="btn-main w-25">
                                                 {{ __('Register') }}
                                             </button>
                                         </div>

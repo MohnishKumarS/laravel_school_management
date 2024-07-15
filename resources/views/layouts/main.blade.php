@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+    <div class="top-space"></div>
     {{-- Navbar --}}
     @include('nav')
 

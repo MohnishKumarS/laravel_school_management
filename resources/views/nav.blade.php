@@ -1,18 +1,23 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Oxford</a>
+    <a class="navbar-brand" href="{{url('/')}}">
+      <img src="{{asset('image/oxford-logo.jpg')}}" alt="oxford-logo" width="40">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav m-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link {{Request::is('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}" >Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link {{Request::is('admission') ? 'active' : ''}}" href="{{url('admission')}}">Admission</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link {{Request::is('notice-board') ? 'active' : ''}}" href="{{url('notice-board')}}">NoticeBoard</a>
+        </li>
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
@@ -22,14 +27,18 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        </li> --}}
       </ul>
       <div>
-        <a href="{{route('login')}}" class="btn btn-success">Login</a>
+        <a href="{{route('login')}}" class="btn-main">Login</a>
       </div>
     </div>
   </div>
 </nav>
+<style>
+  .nav-link.active{
+    color: #f0498c !important;
+    font-weight: 600;
+    letter-spacing: 1px
+  }
+</style>

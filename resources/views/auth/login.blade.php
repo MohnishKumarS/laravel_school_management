@@ -18,7 +18,10 @@
                             <div>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
-                                    <h3 class="fw-bold">{{ __('Login') }}</h3>
+                                    <div class="text-center mb-4">
+                                        <img src="{{asset('image/oxford-logo.jpg')}}" alt="oxford-logo" width="50">
+                                    </div>
+                                    <h5 class="sec-title">{{ __('LOGIN') }}</h5>
                                     <div class="row mb-3">
                                         <label for="email" class="col-md-4 col-form-label">{{ __('Email Address') }}</label>
             
@@ -61,12 +64,12 @@
             
                                     <div class="row mb-0">
                                         <div class="col-md-8">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="submit" class="btn-main w-25">
                                                 {{ __('Login') }}
                                             </button>
             
                                             @if (Route::has('password.request'))
-                                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                <a class="btn btn-link text-muted" href="{{ route('password.request') }}">
                                                     {{ __('Forgot Your Password?') }}
                                                 </a>
                                             @endif

@@ -145,7 +145,7 @@ INSERT INTO `teachers` (`id`, `name`, `gender`, `role`, `joined_at`, `created_at
 	(4, 'Ezhumalai', 'Male', 'Maths', '2015-11-18', '2024-07-13 11:14:23', '2024-07-13 11:14:23'),
 	(5, 'Balamurugan', 'Male', 'Tamil', '2023-06-13', '2024-07-13 11:15:21', '2024-07-13 11:15:21'),
 	(6, 'Santhanam', 'Female', 'Social', '2009-06-13', '2024-07-13 11:16:19', '2024-07-13 11:16:19'),
-	(10, 'Rajaeshwari', 'Female', 'Physics', '2017-06-13', '2024-07-13 12:02:26', '2024-07-13 12:02:26');
+	(7, 'Rajaeshwari', 'Female', 'Physics', '2017-06-13', '2024-07-13 12:02:26', '2024-07-13 12:02:26');
 
 -- Dumping structure for table school_management.users
 CREATE TABLE IF NOT EXISTS `users` (

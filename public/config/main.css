@@ -1,11 +1,116 @@
-
+body{
+    overflow-x: hidden;
+    /* font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif; */
+}
+.top-space{
+    height: 70px;
+}
 section{
     padding-bottom: 100px;
 }
+.text-main{
+    color: #f0498c;
+}
 .sec-title{
-    font-size: 1.8rem;
-    color: brown;
+    position: relative;
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+    color: #f0498c;
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 45px;
 }
+.sec-title::before{
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 80px;
+    background-color: #f0498c;
+    border-radius: 40px;
+}
+
+.banner-admission img{
+    height: 400px;
+    width: 100%;
+    object-fit: contain;
+  }
+  .about-title{
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 700;
+    text-transform: uppercase;
+    &::first-letter{
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #f0498c;
+    }
+  }
+  .about-txt{
+    font-size: 0.9rem;
+    color: #888;
+    &::first-letter{
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #f0498c;
+    }
+  }
+
+  .quotes-block{
+    padding: 150px 0;
+    background: url('../image/quotes-pattern.png') no-repeat center;
+    background-size: cover
+}
+.quotes__txt{
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: calc(17px + 3vw);
+    text-align: center;
+}
+.quotes__author{
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    color: #f0498c;
+}
+
+
+/* BTN */
+.btn-main {
+    background: #f0498c;
+    border: 1px solid #f0498c;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+  
+  .btn-main:hover,
+  .btn-main:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #f0498c;
+  }
+  
+  .btn-main:active {
+    opacity: .5;
+  }

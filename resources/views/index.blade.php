@@ -3,17 +3,17 @@
 
 @section('content')
     <div>
-        <section class="banners">
+        @if ($banner->count())
+        <section class="banners container">
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="2000">
-                        <img src="{{ url('image/banners/banner-1.jpg') }}" class="d-block w-100 img-fluid object-fit-contain"
-                            style="height: 400px" alt="...">
+                    @foreach ($banner as $key=>$val)
+                    <div class="carousel-item @if($key == 0) active @endif" data-bs-interval="{{$val->time}}">
+                        <img src="{{ url('image/banners/'.$val->image) }}" class="d-block w-100 img-fluid object-fit-cover"
+                            style="height: 450px" alt="banner-poster">
                     </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img src="{{ url('image/banners/banner-2.jpg') }}"
-                            class="d-block w-100 img-fluid object-fit-contain" style="height: 400px" alt="...">
-                    </div>
+                    @endforeach
+
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                     data-bs-slide="prev">
@@ -27,23 +27,45 @@
                 </button>
             </div>
         </section>
+        @endif
+
+        <section class="about container">
+            <h2 class="sec-title">About US</h2>
+            <div class="row ">
+                <div class="col-lg-6">
+                    <div>
+                        <p class="about-title">
+                            A team that believes that education will create globally competitive individuals</p>
+                        <p class="about-txt">We started with a small school, few students, one Oxford Educational Trust and a dedicated set of teachers back in 1986. Today we are an educational edifice with lakhs of students, hundreds of teachers and several top-notch institutions growing under our umbrella. Our institutional breadth spans from Kindergarten (KG) to Post-Graduate levels. With focus on evolving our teaching and learning practices to meet the best of global standards the group pioneered the Oxford New Gen Edu Network mission.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/7eogR103sPU?si=vVG3K9NYN5_GiyQ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="banners">
             <h2 class="sec-title">Banners</h2>
 
             <div class="block-wrap container">
-                <form action="{{ url('/add-quote') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/add-banner') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col">
                             <div class="form-floating ">
                                 <input type="file" class="form-control" id="floatingInput"
-                                    placeholder="Quote of the day">
+                                    placeholder="Image" required name="image">
                                 <label for="floatingInput">Images</label>
                             </div>
+                            @error('image')
+                            <div class="text-danger"><small>{{ $message }}</small></div>
+                        @enderror
                         </div>
                         <div class="col">
                             <div class="form-floating">
-                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" required name="time">
                                     <option selected value="">Choose</option>
                                     <option value="1000">1 second</option>
                                     <option value="2000">2 second</option>
@@ -53,23 +75,196 @@
                                 </select>
                                 <label for="floatingSelect">Autoplay (seconds)</label>
                             </div>
+                            @error('time')
+                            <div class="text-danger"><small>{{ $message }}</small></div>
+                        @enderror
                         </div>
                     </div>
                     <div class="btn-wrap my-3 text-center">
                         <button class="btn btn-success w-25" type='submit'>Submit</button>
                     </div>
                 </form>
+
+                <div class="banner-table">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($banner->count())
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($banner as $val)
+                            <tr class="align-middle">
+                                <th scope="row">{{$i++}}</th>
+                                <td><img src="image/banners/{{$val->image}}" height="150" class="object-fit-cover" alt=""></td>
+                                <td>{{ $val->time / 1000  }} sec</td>
+                                <td>
+                                    <div>
+                                        {{-- <a data-bs-toggle="modal" data-bs-target="#edit-banner"
+                                            class="btn btn-primary">Edit</a> --}}
+                                        <a href="{{ URL::to('delete-banner/' . $val->id) }}"
+                                            class="btn btn-danger">Delete <i class="bi bi-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                  
+                            @else
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="text-danger text-center py-5">
+                                            No data found !
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </section>
+        <section class="quotes">
+            <h2 class="sec-title">Latest news</h2>
+            @if ($news)
+
+                <div class="news-block">
+                    <div class="row news-row">
+                        <div class="col col-lg-2 p-0">
+                            <div class="news-title">
+                                LATEST NEWS
+                            </div>
+                        </div>
+                        <div class="col col-lg-10 news-col-two p-0">
+                            <div class="news-marquee">
+                                 <img src="{{asset('image/new-icon.gif')}}" class="pe-3" alt="new-news">   {{$news->news}}                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+                <style>
+      
+                    .news-title{
+                        position: relative;
+                        background: #f0498c;
+                        color: white;
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        text-align: center;
+                        text-transform: uppercase;
+                        padding: 10px 0;
+                        z-index: 100;
+                    }
+                    .news-col-two{
+                        background: rgb(252, 252, 252);
+                        border: 1px solid rgb(214, 214, 214);
+                    }
+                    .news-marquee{
+                         overflow: hidden;
+                         white-space: nowrap;
+                         width: 100%;
+                         padding: 10px 0;
+                         font-size: 1rem;
+                         font-weight: 600;
+                         color: #111111;
+                         transform: translate(100%,0);
+                         animation: marquee 30s linear infinite;
+ 
+                    }
+                    @keyframes marquee {
+                        0% { transform: translate(100%,0); }
+                        100% { transform:translate(-100%,0)  }
+                    }
+                </style>
+            <div class="block-wrap container">
+                <form action="{{ url('/add-news') }}" method="post"  autocomplete="off">
+                    @csrf
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating ">
+                                <textarea class="form-control" placeholder="Latest news here..." id="floatingTextarea" name="news"></textarea>
+                                <label for="floatingTextarea">Latest news type here....</label>
+                            </div>
+                            @error('news')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <div class="btn-wrap my-3 text-center">
+                                <button class="btn btn-success w-25" type='submit'>Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </form>
+                <div class="news-table">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" width="60%">News</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($news)
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{ $news->news }}</td>
+                                    <td>
+                                        <div>
+                                            <a data-bs-toggle="modal" data-bs-target="#edit-news"
+                                                class="btn btn-primary">Edit</a>
+                                            <a href="{{ URL::to('delete-news/' . $news->id) }}"
+                                                class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="text-danger text-center py-5">
+                                            No data found !
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+
+
+                </div>
             </div>
         </section>
         <section class="quotes">
             <h2 class="sec-title">Thought of the day</h2>
-            <div class="quotes-block container">
+            @if ($quote)
+            <div class="quotes-block">
                 <h4 class="quotes__txt">
                     <q>{{$quote->name}}</q>
                 </h4>
+                @if ($quote->author)
+                <div class="quotes__author">
+                  --  {{$quote->author}}
+                </div>
+                @endif
+                
             </div>
+            @endif
+
             <div class="block-wrap container">
-                <form action="{{ url('/add-quote') }}" method="post">
+                <form action="{{ url('/add-quote') }}" method="post"  autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col">
@@ -140,11 +335,11 @@
             </div>
         </section>
 
-        <section class="teachers">
-            <h2 class="sec-title">Teachers</h2>
+        <section class="students">
+            <h2 class="sec-title">students</h2>
 
             <div class="block-wrap container">
-                <form action="{{ url('/add-teacher') }}" method="post">
+                <form action="{{ url('/add-student') }}" method="post"  autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col">
@@ -162,6 +357,147 @@
                                 <select class="form-select" id="floatingSelect"
                                     aria-label="Floating label select example" name="gender">
                                     <option selected>Choose</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <label for="floatingSelect">Gender of Staff</label>
+                            </div>
+                            @error('gender')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="std_id">
+                                    <option selected value="">Choose</option>
+                                    @foreach ($std as $item)
+                                    <option value="{{$item->id}}">{{$item->class}}</option>
+                                    @endforeach
+                                
+                                </select>
+                                <label for="floatingSelect">class / grade</label>
+                            </div>
+                            @error('std_id')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="year">
+                                    <option selected value="">Choose</option>
+                                    <option value="2024-25">2024-25</option>
+                                    <option value="2025-26">2025-26</option>
+                                </select>
+                                <label for="floatingSelect">select a year</label>
+                            </div>
+                            @error('year')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+       
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="floatingPassword" placeholder="email"
+                                    name="email">
+                                <label for="floatingPassword">Email address</label>
+                            </div>
+                            @error('email')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="floatingPassword" placeholder="mobile"
+                                    name="mobile">
+                                <label for="floatingPassword">Mobile</label>
+                            </div>
+                            @error('mobile')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="btn-wrap my-3 text-center">
+                        <button class="btn btn-success w-25" type='submit'>Submit</button>
+                    </div>
+                </form>
+
+                <div class="teacher-table">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if ($teacher->count())
+                                @php
+                                    $i = 1;
+                                @endphp
+                                @foreach ($teacher as $val)
+                                    <tr>
+                                        <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $val->name }}</td>
+                                        <td>{{ $val->gender }}</td>
+                                        <td>{{ $val->role }}</td>
+                                        <td>{{ Carbon\Carbon::parse($val->joined_at)->diffForHumans() }}</td>
+                                        <td>
+                                            <div>
+                                                <a data-bs-toggle="modal" data-bs-target="#edit-teacher"
+                                                    class="btn btn-primary">Edit</a>
+                                                <a href="{{ URL::to('delete-teacher/' . $val->id) }}"
+                                                    class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="text-danger text-center py-5">
+                                            No data found !
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </section>
+        <section class="teachers">
+            <h2 class="sec-title">Teachers</h2>
+
+            <div class="block-wrap container">
+                <form action="{{ url('/add-teacher') }}" method="post"  autocomplete="off">
+                    @csrf
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating ">
+                                <input type="text" class="form-control" id="floatingInput"
+                                    placeholder="Name of the staff" name="name">
+                                <label for="floatingInput">Name</label>
+                            </div>
+                            @error('name')
+                                <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="gender">
+                                    <option selected value="">Choose</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
@@ -206,7 +542,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Gender</th>
                                 <th scope="col">Role</th>
-                                <th scope="col">joined-at</th>
+                                <th scope="col">joined</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -222,7 +558,7 @@
                                         <td>{{ $val->name }}</td>
                                         <td>{{ $val->gender }}</td>
                                         <td>{{ $val->role }}</td>
-                                        <td>{{ $val->joined_at }}</td>
+                                        <td>{{ Carbon\Carbon::parse($val->joined_at)->diffForHumans() }}</td>
                                         <td>
                                             <div>
                                                 <a data-bs-toggle="modal" data-bs-target="#edit-teacher"
@@ -235,7 +571,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="6">
                                         <div class="text-danger text-center py-5">
                                             No data found !
                                         </div>
@@ -253,7 +589,7 @@
             <h2 class="sec-title">Classes (std)</h2>
 
             <div class="block-wrap container">
-                <form action="{{ url('/add-std') }}" method="post">
+                <form action="{{ url('/add-std') }}" method="post"  autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col">
@@ -345,7 +681,7 @@
                                         <td>{{ $val->class }}</td>
                                         <td>{{ $val->std }}</td>
                                         <td>{{ $val->teacher->name }}</td>
-                                        <td>{{ $val->year }}</td>
+                                        <td>{{  $val->year }}</td>
                                         <td>
                                             <div>
                                                 <a data-bs-toggle="modal" data-bs-target="#edit-std"
@@ -358,7 +694,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="6">
                                         <div class="text-danger text-center py-5">
                                             No data found !
                                         </div>
@@ -378,6 +714,7 @@
 
 
 <!-- Edit quote Modal -->
+@if ($quote)
 <div class="modal fade" id="edit-quote" tabindex="-1" aria-labelledby="edit-quoteLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -386,7 +723,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('update-quote/' . $quote->id) }}" method="post">
+                <form action="{{ url('update-quote/' . $quote->id) }}" method="post"  autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -419,6 +756,43 @@
         </div>
     </div>
 </div>
+@endif
+<!-- Edit news Modal -->
+@if ($news)
+<div class="modal fade" id="edit-news" tabindex="-1" aria-labelledby="edit-newsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="edit-newsLabel">Edit news</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('update-news/' . $news->id) }}" method="post"  autocomplete="off">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <div class="form-floating ">
+                                    <textarea class="form-control" placeholder="Latest news here..." id="floatingTextarea" name="news" style="height: 100px">{{$news->news}}</textarea>
+                                    <label for="floatingTextarea">Latest news type here....</label>
+                                </div>
+                               
+                            </div>
+                
+                        </div>
+  
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
 <!-- Edit teacher Modal -->
 <div class="modal fade" id="edit-teacher" tabindex="-1" aria-labelledby="edit-teacherLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -428,7 +802,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('/add-teacher') }}" method="post">
+                <form action="{{ url('/add-teacher') }}" method="post"  autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-4">
@@ -487,7 +861,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('/add-std') }}" method="post">
+                <form action="{{ url('/add-std') }}" method="post"  autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-4">
