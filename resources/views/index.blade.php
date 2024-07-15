@@ -183,7 +183,7 @@
                     }
                     @keyframes marquee {
                         0% { transform: translate(100%,0); }
-                        100% { transform:translate(-100%,0)  }
+                        100% { transform:translate(-80%,0)  }
                     }
                 </style>
             <div class="block-wrap container">
@@ -219,7 +219,7 @@
                         </thead>
                         <tbody>
                             @if ($news)
-                                <tr>
+                                <tr class="align-middle">
                                     <th scope="row">1</th>
                                     <td>{{ $news->news }}</td>
                                     <td>
@@ -305,7 +305,7 @@
                         </thead>
                         <tbody>
                             @if ($quote)
-                                <tr>
+                                <tr class="align-middle">
                                     <th scope="row">1</th>
                                     <td>{{ $quote->name }}</td>
                                     <td>{{ $quote->author ?? 'No data' }}</td>
@@ -423,7 +423,7 @@
                     </div>
                 </form>
 
-                <div class="teacher-table">
+                <div class="student-table">
 
                     <table class="table">
                         <thead>
@@ -444,7 +444,7 @@
                                     $i = 1;
                                 @endphp
                                 @foreach ($teacher as $val)
-                                    <tr>
+                                    <tr class="align-middle">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $val->name }}</td>
                                         <td>{{ $val->gender }}</td>
@@ -553,7 +553,7 @@
                                     $i = 1;
                                 @endphp
                                 @foreach ($teacher as $val)
-                                    <tr>
+                                    <tr class="align-middle">
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $val->name }}</td>
                                         <td>{{ $val->gender }}</td>

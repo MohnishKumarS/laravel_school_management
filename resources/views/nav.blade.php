@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
-  <div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" href="{{url('/')}}">
       <img src="{{asset('image/oxford-logo.jpg')}}" alt="oxford-logo" width="40">
     </a>
