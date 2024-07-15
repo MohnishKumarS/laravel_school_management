@@ -1,7 +1,26 @@
-@extends('layouts.main')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oxford Dashboard</title>
+      <!-- CSRF Token -->
+      <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- link css lib --}}
+    @include('lib.css')
+
+    @stack('styles')
+</head>
+
+<body>
+    <div class="top-space"></div>
+    {{-- Navbar --}}
+    @include('nav')
+
+    {{-- content section --}}
+    <main class="page-wrapper">
         <div class="row">
             <div class="col-lg-3 col-xxl-2">
               <div class="left-section">
@@ -40,12 +59,19 @@
             </div>
             <div class="col-lg-8 col-xxl-6">
                 <div class="right-section">
-                    asd
+                    @yield('content')
                 </div>
             </div>
         </div>
-      
        
-    </div>
+    </main>
 
-@endsection
+    {{-- footer --}}
+
+    {{-- link js lib --}}
+    @include('lib.js')
+
+    @stack('scripts')
+</body>
+
+</html>
