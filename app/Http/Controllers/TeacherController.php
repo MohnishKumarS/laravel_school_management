@@ -30,6 +30,20 @@ class TeacherController extends Controller
      
     }
 
+    // update teacher
+    public function update_teacher(Request $req){
+     
+        $teacher = Teacher::findOrFail($req->id);
+        $teacher->name = $req->name;
+        $teacher->gender = $req->gender;
+        $teacher->role = $req->role;
+        $teacher->joined_at = $req->joined_at;
+        $teacher->save();
+        session()->flash('status', 'success');
+        session()->flash('title', 'Teacher updated successfully');
+        return redirect()->back();
+    }
+
 
     // delete teacher
     public function delete_teacher($id){

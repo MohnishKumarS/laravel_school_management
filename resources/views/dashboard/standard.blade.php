@@ -104,7 +104,12 @@
                               <td>
                                   <div>
                                       <a data-bs-toggle="modal" data-bs-target="#edit-std"
-                                          class="btn btn-primary">Edit</a>
+                                      data-id="{{ $val->id }}"
+                                      data-class="{{ $val->class }}"
+                                      data-std="{{ $val->std }}"
+                                      data-cc="{{ $val->teacher->id }}"
+                                      data-year="{{ $val->year }}"
+                                          class="btn btn-primary edit-std-btn">Edit</a>
                                       <a href="{{ URL::to('delete-std/' . $val->id) }}"
                                           class="btn btn-danger">Delete</a>
                                   </div>
@@ -128,7 +133,29 @@
   </div>
 </section>
 
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    var editButtons = document.querySelectorAll('.edit-std-btn');
+    editButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var id = this.getAttribute('data-id');
+            var className = this.getAttribute('data-class');
+            var stdName = this.getAttribute('data-std');
+            var teacherName = this.getAttribute('data-cc');
+            var year = this.getAttribute('data-year');
+            console.log(teacherName);
+            // document.getElementById('std-id').value = id;
+            document.getElementById('std-class').value = className;
+            document.getElementById('std-standard').value = stdName;
+            document.getElementById('std-cc').value = teacherName;
+            document.getElementById('std-year').value = year;
+        });
+    });
+});
 
+    </script>
+@endpush
 
 
 
@@ -146,7 +173,7 @@
                   <div class="row">
                       <div class="col-12 mb-4">
                           <div class="form-floating ">
-                              <select class="form-select" id="floatingSelect"
+                              <select class="form-select" id="std-class"
                                   aria-label="Floating label select example" name="class">
                                   <option selected value="">choose a classes</option>
                                   <option value="Class-09">Class-09</option>
@@ -160,7 +187,7 @@
                       </div>
                       <div class="col-12 mb-4">
                           <div class="form-floating">
-                              <select class="form-select" id="floatingSelect"
+                              <select class="form-select" id="std-standard"
                                   aria-label="Floating label select example" name="std">
                                   <option selected value="">choose a standard</option>
                                   <option value="IX">IX</option>
@@ -174,9 +201,9 @@
                       </div>
                       <div class="col-12 mb-4">
                           <div class="form-floating">
-                              <select class="form-select" id="floatingSelect"
+                              <select class="form-select" id="std-cc"
                                   aria-label="Floating label select example" name="cc">
-                                  <option selected value="" value="">choose a class coordinate</option>
+                                  <option selected value="">choose a class coordinate</option>
                                   @forelse ($teacher as $val)
                                       <option value="{{ $val->id }}">{{ $val->name }}</option>
                                   @empty
@@ -188,7 +215,7 @@
                       </div>
                       <div class="col-12 mb-4">
                           <div class="form-floating">
-                              <input type="text" class="form-control" id="floatingPassword"
+                              <input type="text" class="form-control" id="std-year"
                                   placeholder="Date of joning" name="year">
                               <label for="floatingPassword">year <small>(ex:2023-24)</small></label>
                           </div>

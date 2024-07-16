@@ -57,7 +57,7 @@
                 </aside>
               </div>
             </div>
-            <div class="col-lg-8 col-xxl-7">
+            <div class="col-lg-8 col-xxl-8">
                 <div class="right-section">
                     @yield('content')
                 </div>

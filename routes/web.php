@@ -49,6 +49,7 @@ Route::controller(NewsController::class)->group(function(){
 });
 Route::controller(TeacherController::class)->group(function(){
     Route::post('add-teacher','add_teacher');
+    Route::put('update-teacher','update_teacher');
     Route::get('delete-teacher/{teacher_id}','delete_teacher');
 });
 Route::controller(StudentController::class)->group(function(){
