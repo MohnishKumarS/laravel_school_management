@@ -21,6 +21,11 @@ class Standard extends Model
         {
             return $this->belongsTo(Teacher::class, 'cc', 'id');
         }
+
+
+        public function students(){
+            return $this->hasMany(Student::class,'std_id','id');
+        }
     
 
 

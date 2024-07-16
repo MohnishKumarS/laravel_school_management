@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StandardController;
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,19 @@ use App\Http\Controllers\AdmissionController;
 */
 
 Route::get('/', [HomeController::Class,'index']);
+Route::get('/about-us', [HomeController::Class,'about_us']);
 Route::get('/admission', [HomeController::Class,'admission']);
+Route::get('std-details/{id}',[HomeController::Class,'std_details']);
+
+
+Route::controller(DashboardController::class)->group(function(){
+    Route::get('banners','showBanners');
+    Route::get('news','showNews');
+    Route::get('quotes','showQuotes');
+    Route::get('standard','showStandard');
+    Route::get('students','showStudents');
+    Route::get('teachers','showTeachers');
+});
 
 Route::controller(QuoteController::class)->group(function(){
     Route::post('add-quote','add_quote');
@@ -58,4 +71,4 @@ Route::controller(AdmissionController::Class)->group(function(){
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('home');
+Route::get('/home', [DashboardController::class, 'dashboard'])->name('home');

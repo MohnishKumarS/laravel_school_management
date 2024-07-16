@@ -83,6 +83,3 @@
     </section>
 @endsection
 
-<!-- HTML !-->
-<button class="button-24" role="button">Button 24</button>
-

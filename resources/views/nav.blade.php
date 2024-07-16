@@ -17,6 +17,9 @@
         <li class="nav-item">
           <a class="nav-link {{Request::is('notice-board') ? 'active' : ''}}" href="{{url('notice-board')}}">NoticeBoard</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link {{Request::is('about-us') ? 'active' : ''}}" href="{{url('about-us')}}">AboutUs</a>
+        </li>
         {{-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

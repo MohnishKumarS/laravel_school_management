@@ -18,10 +18,8 @@ class TeacherController extends Controller
       $tea =  Teacher::create($req->all());
       if($tea){
            // Setting flash data
-           session()->flash([
-            'status' => 'success',
-            'title' => 'Teacher added successfully'
-        ]);
+           session()->flash('status', 'success');
+           session()->flash('title', 'Teacher added successfully');
            return redirect()->back();
       }else{
            // Setting flash data

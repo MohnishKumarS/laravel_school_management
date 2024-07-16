@@ -20,44 +20,44 @@
     @include('nav')
 
     {{-- content section --}}
-    <main class="page-wrapper">
+    <main class="page-dashboard">
         <div class="row">
             <div class="col-lg-3 col-xxl-2">
-              <div class="left-section">
+              <div class="left-section d-none d-lg-block">
                 <aside>
-                    <p> Menu </p>
-                    <a href="javascript:void(0)">
+                    <p class="fw-bold"> OXFORD MANAGEMENT </p>
+                    <a href="{{url('/')}}" class="{{Request::is('home') ? 'active' : ''}}">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         Home
                     </a>
-                    <a href="javascript:void(0)">
+                    <a href="{{url('banners')}}" class="{{Request::is('banners') ? 'active' : ''}}">
                         <i class="fa fa-laptop" aria-hidden="true"></i>
                         Banners
                     </a>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-clone" aria-hidden="true"></i>
+                    <a href="{{url('/news')}}" class="{{Request::is('news') ? 'active' : ''}}">
+                        <i class="fa-solid fa-newspaper"></i>
                         Latest News
                     </a>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-star" aria-hidden="true"></i>
+                    <a href="{{url('/quotes')}}" class="{{Request::is('quotes') ? 'active' : ''}}">
+                        <i class="fa-solid fa-quote-left"></i>
                         Quotes
                     </a>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Standards/classes
+                    <a href="{{url('/standard')}}" class="{{Request::is('standard') ? 'active' : ''}}">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        Std/classes
                     </a>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    <a href="{{url('/teachers')}}" class="{{Request::is('teachers') ? 'active' : ''}}">
+                        <i class="fa-solid fa-person-chalkboard"></i>
                         Teachers
                     </a>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    <a href="{{url('/students')}}" class="{{Request::is('students') ? 'active' : ''}}">
+                        <i class="fa-solid fa-children"></i>
                         Students
                     </a>
                 </aside>
               </div>
             </div>
-            <div class="col-lg-8 col-xxl-6">
+            <div class="col-lg-8 col-xxl-7">
                 <div class="right-section">
                     @yield('content')
                 </div>
@@ -72,6 +72,8 @@
     @include('lib.js')
 
     @stack('scripts')
+
+    
 </body>
 
 </html>

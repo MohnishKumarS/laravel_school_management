@@ -1,17 +1,27 @@
-body{
+body {
     overflow-x: hidden;
     /* font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif; */
 }
-.top-space{
+a{
+    text-decoration: none;
+}
+
+.bs{
+    margin-bottom: 80px;
+}
+.top-space {
     height: 70px;
 }
-section{
+
+section {
     padding-bottom: 100px;
 }
-.text-main{
+
+.text-main {
     color: #f0498c;
 }
-.sec-title{
+
+.sec-title {
     position: relative;
     font-size: 1.7rem;
     letter-spacing: 1px;
@@ -20,7 +30,8 @@ section{
     text-align: center;
     margin-bottom: 45px;
 }
-.sec-title::before{
+
+.sec-title::before {
     content: '';
     position: absolute;
     top: -14px;
@@ -32,44 +43,65 @@ section{
     border-radius: 40px;
 }
 
-.banner-admission img{
+.banner-admission img {
     height: 400px;
     width: 100%;
     object-fit: contain;
+}
+
+.std-item {
+    text-align: center;
+    padding: 30px 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
-  .about-title{
+
+  .std-block__icon {
+    margin-bottom: 15px;
+  }
+
+  .std-block__title {
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+
+.about-title {
     font-size: 1.1rem;
     color: #333;
     font-weight: 700;
     text-transform: uppercase;
-    &::first-letter{
+
+    &::first-letter {
         font-size: 2.5rem;
         font-weight: 800;
         color: #f0498c;
     }
-  }
-  .about-txt{
+}
+
+.about-txt {
     font-size: 0.9rem;
     color: #888;
-    &::first-letter{
+
+    &::first-letter {
         font-size: 2.5rem;
         font-weight: 800;
         color: #f0498c;
     }
-  }
+}
 
-  .quotes-block{
+.quotes-block {
     padding: 150px 0;
     background: url('../image/quotes-pattern.png') no-repeat center;
     background-size: cover
 }
-.quotes__txt{
+
+.quotes__txt {
     max-width: 900px;
     margin: 0 auto;
     font-size: calc(17px + 3vw);
     text-align: center;
 }
-.quotes__author{
+
+.quotes__author {
     margin-top: 20px;
     font-size: 1rem;
     font-weight: 600;
@@ -77,6 +109,88 @@ section{
     color: #f0498c;
 }
 
+.news-title {
+    position: relative;
+    background: #f0498c;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+.news-col-two {
+    background: rgb(252, 252, 252);
+    border: 1px solid rgb(214, 214, 214);
+}
+
+.news-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111111;
+    transform: translate(100%, 0);
+    animation: marquee 30s linear infinite;
+
+}
+
+@keyframes marquee {
+    0% {
+        transform: translate(100%, 0);
+    }
+
+    100% {
+        transform: translate(-80%, 0)
+    }
+}
+.teacher-item {
+    text-align: center;
+    padding: 30px 10px;
+    border: 1px solid #d6d6d6;
+    cursor: grab;
+  }
+
+  .teacher-block__icon {
+    margin-bottom: 15px;
+  }
+
+  .teacher-block__title h3 {
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+  .swiper-button-next:after, .swiper-button-prev:after{
+    font-size: 35px !important;
+    color: #f0498c;
+  }
+  .teacher-block__sub-title{
+    color: #f0498c;
+    font-size: 14px;
+    font-style: italic;
+  }
+.map-container,
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.map-container iframe,
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 
 /* BTN */
 .btn-main {
@@ -89,7 +203,7 @@ section{
     text-decoration: none;
     cursor: pointer;
     display: inline-block;
-    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
     font-size: 16px;
     font-weight: 800;
     line-height: 16px;
@@ -102,24 +216,29 @@ section{
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: middle;
-  }
-  
-  .btn-main:hover,
-  .btn-main:active {
+}
+
+.btn-main:hover,
+.btn-main:active {
     background-color: initial;
     background-position: 0 0;
     color: #f0498c;
-  }
-  
-  .btn-main:active {
-    opacity: .5;
-  }
-
-  /* dashboard */
-  .right-section{
-    padding: 50px 0;
 }
+
+.btn-main:active {
+    opacity: .5;
+}
+
+/* dashboard */
+.right-section {
+    padding: 70px 0;
+}
+
+
 aside {
+    position: fixed;
+    top: 80px;
+    left: 0;
     color: #fff;
     width: 250px;
     padding-left: 20px;
@@ -129,7 +248,7 @@ aside {
 }
 
 aside a {
-    font-size: 12px;
+    font-size: 14px;
     color: #fff;
     display: block;
     padding: 12px;
@@ -138,7 +257,7 @@ aside a {
     -webkit-tap-highlight-color: transparent;
 }
 
-aside a:hover {
+aside a:hover ,aside a.active {
     color: #3f5efb;
     background: #fff;
     outline: none;
@@ -152,7 +271,7 @@ aside a i {
     margin-right: 5px;
 }
 
-aside a:hover::after {
+aside a:hover::after ,aside a.active::after{
     content: "";
     position: absolute;
     background-color: transparent;
@@ -164,7 +283,7 @@ aside a:hover::after {
     box-shadow: 0 20px 0 0 #fff;
 }
 
-aside a:hover::before {
+aside a:hover::before,aside a.active::before {
     content: "";
     position: absolute;
     background-color: transparent;

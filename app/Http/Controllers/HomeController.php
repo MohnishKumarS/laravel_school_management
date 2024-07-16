@@ -36,11 +36,19 @@ class HomeController extends Controller
         return view('index',compact('banner','news','quote','teacher','std'));
     }
 
-    public function dashboard(){
-        return view('home');
+
+    public function about_us(){
+        return view('about-us');
     }
 
     public function admission(){
         return view('admission');
+    }
+
+    public function std_details($id){
+        $std = Standard::findOrFail($id);
+
+        return view('student-details',compact('std'));
+        return $std->students;
     }
 }

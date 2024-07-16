@@ -10,4 +10,9 @@ class Student extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+    public function std(){
+        return $this->belongsTo(Standard::class, 'std_id', 'id');
+    }
 }
