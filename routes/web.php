@@ -85,7 +85,8 @@ Route::get('/clear', function() {
     Artisan::call('config:clear');
     Artisan::call('config:cache');
     Artisan::call('view:clear');
-    Artisan::call('optimize');
+    Artisan::call('route:clear');
+    // Artisan::call('optimize');
  
     return "Cleared!";
  

@@ -6,9 +6,30 @@
       <h2 class="sec-title">Class {{$std->std}}</h2>
 
       <div class="container">
-        <h5 class="mb-4">
-          Class Coordinator : {{$std->teacher->name }}  <small>({{$std->teacher->role}})</small>
-        </h5>
+        <div class="d-lg-flex justify-content-between mb-4 flex-row">
+            <h5 class="mb-4">
+                Class Coordinator : {{$std->teacher->name }}  <small>({{$std->teacher->role}})</small>
+              </h5>
+              <div class="w-25">
+                <div class="form-floating">
+                    <select class="form-select" id="std-select" aria-label="Floating label select example">
+                        @foreach ($standard as $val)
+                        <option value="{{$val->id}}" @if ($val->id == $std->id) selected @endif>{{$val->class}}</option>
+                        @endforeach
+
+                    </select>
+                    <label for="floatingSelect">choose a std/class</label>
+                  </div>
+              </div>
+        </div>
+     @push('scripts')
+         <script>
+             $('#std-select').on('change', function() {
+                 let std_id = $(this).val();
+                 window.location.href = "{{ url('std-details') }}/"+std_id;
+             });
+         </script>
+     @endpush
         <div class="table-responsive">
           <div class="student-table">
 

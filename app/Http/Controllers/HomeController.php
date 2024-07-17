@@ -35,8 +35,8 @@ class HomeController extends Controller
     public function std_details($id){
         $std = Standard::findOrFail($id);
         $students = Student::where('std_id',$std->id)->paginate(10);
-        return view('student-details',compact('std','students'));
-        return $std->students;
+        $standard = Standard::all();
+        return view('student-details',compact('std','students','standard'));
     }
 
     public function notice_board(){

@@ -8,6 +8,7 @@
     <title>Oxford School Management</title>
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
+      <link rel="shortcut icon" href="{{asset('image/oxford-logo.jpg')}}" type="image/x-icon">
     {{-- link css lib --}}
     @include('lib.css')
 
