@@ -29,9 +29,9 @@
       </div>
 
       <h2 class="sec-title">Latest news</h2>
-      <div class="news-table">
+      <div class="news-table table-responsive">
 
-          <table class="table">
+          <table class="table table-hover table-bordered">
               <thead>
                   <tr>
                       <th scope="col">#</th>
@@ -47,9 +47,9 @@
                           <td>
                               <div>
                                   <a data-bs-toggle="modal" data-bs-target="#edit-news"
-                                      class="btn btn-primary">Edit</a>
+                                      class="btn btn-outline-primary">Edit</a>
                                   <a href="{{ URL::to('delete-news/' . $news->id) }}"
-                                      class="btn btn-danger">Delete</a>
+                                      class="btn btn-outline-danger">Delete</a>
                               </div>
                           </td>
                       </tr>

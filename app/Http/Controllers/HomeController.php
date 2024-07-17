@@ -5,27 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Quote;
 use App\Models\Banner;
+use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Standard;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+   
     public function index()
     {
         $banner = Banner::all();
@@ -47,8 +34,13 @@ class HomeController extends Controller
 
     public function std_details($id){
         $std = Standard::findOrFail($id);
-
-        return view('student-details',compact('std'));
+        $students = Student::where('std_id',$std->id)->paginate(10);
+        return view('student-details',compact('std','students'));
         return $std->students;
+    }
+
+    public function notice_board(){
+        $news = News::first();
+        return view('notice-board',compact('news'));
     }
 }

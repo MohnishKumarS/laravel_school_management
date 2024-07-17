@@ -75,9 +75,9 @@
      </div>
 
      <h2 class="sec-title">Class list</h2>
-      <div class="teacher-table">
+      <div class="teacher-table table-responsive">
 
-          <table class="table">
+          <table class="table table-hover table-bordered table-striped">
               <thead>
                   <tr>
                       <th scope="col">#</th>
@@ -109,9 +109,9 @@
                                       data-std="{{ $val->std }}"
                                       data-cc="{{ $val->teacher->id }}"
                                       data-year="{{ $val->year }}"
-                                          class="btn btn-primary edit-std-btn">Edit</a>
+                                          class="btn btn-outline-primary edit-std-btn"><i class="bi bi-pencil-square"></i></a>
                                       <a href="{{ URL::to('delete-std/' . $val->id) }}"
-                                          class="btn btn-danger">Delete</a>
+                                          class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
                                   </div>
                               </td>
                           </tr>
@@ -136,16 +136,16 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    var editButtons = document.querySelectorAll('.edit-std-btn');
+    let editButtons = document.querySelectorAll('.edit-std-btn');
     editButtons.forEach(function (button) {
         button.addEventListener('click', function () {
-            var id = this.getAttribute('data-id');
-            var className = this.getAttribute('data-class');
-            var stdName = this.getAttribute('data-std');
-            var teacherName = this.getAttribute('data-cc');
-            var year = this.getAttribute('data-year');
+            let id = this.getAttribute('data-id');
+            let className = this.getAttribute('data-class');
+            let stdName = this.getAttribute('data-std');
+            let teacherName = this.getAttribute('data-cc');
+            let year = this.getAttribute('data-year');
             console.log(teacherName);
-            // document.getElementById('std-id').value = id;
+            document.getElementById('std-id').value = id;
             document.getElementById('std-class').value = className;
             document.getElementById('std-standard').value = stdName;
             document.getElementById('std-cc').value = teacherName;
@@ -164,17 +164,19 @@
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
-              <h1 class="modal-title fs-5" id="edit-stdLabel">Edit std</h1>
+              <h1 class="modal-title fs-5" id="edit-stdLabel">Edit Classes</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form action="{{ url('/add-std') }}" method="post"  autocomplete="off">
+              <form action="{{ url('/update-std') }}" method="post"  autocomplete="off">
                   @csrf
+                  @method('PUT')
                   <div class="row">
+                    <input type="hidden" name="id" id="std-id" >
                       <div class="col-12 mb-4">
                           <div class="form-floating ">
                               <select class="form-select" id="std-class"
-                                  aria-label="Floating label select example" name="class">
+                                  aria-label="Floating label select example" name="class" required>
                                   <option selected value="">choose a classes</option>
                                   <option value="Class-09">Class-09</option>
                                   <option value="Class-10">Class-10</option>
@@ -188,7 +190,7 @@
                       <div class="col-12 mb-4">
                           <div class="form-floating">
                               <select class="form-select" id="std-standard"
-                                  aria-label="Floating label select example" name="std">
+                                  aria-label="Floating label select example" name="std" required>
                                   <option selected value="">choose a standard</option>
                                   <option value="IX">IX</option>
                                   <option value="X">X</option>
@@ -202,7 +204,7 @@
                       <div class="col-12 mb-4">
                           <div class="form-floating">
                               <select class="form-select" id="std-cc"
-                                  aria-label="Floating label select example" name="cc">
+                                  aria-label="Floating label select example" name="cc" required>
                                   <option selected value="">choose a class coordinate</option>
                                   @forelse ($teacher as $val)
                                       <option value="{{ $val->id }}">{{ $val->name }}</option>
@@ -216,7 +218,7 @@
                       <div class="col-12 mb-4">
                           <div class="form-floating">
                               <input type="text" class="form-control" id="std-year"
-                                  placeholder="Date of joning" name="year">
+                                  placeholder="Date of joning" name="year" required>
                               <label for="floatingPassword">year <small>(ex:2023-24)</small></label>
                           </div>
    

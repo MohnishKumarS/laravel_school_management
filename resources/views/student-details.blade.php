@@ -27,11 +27,11 @@
                 </thead>
                 <tbody>
   
-                    @if ($std->students->count())
+                    @if ($students->count())
                         @php
                             $i = 1;
                         @endphp
-                        @foreach ($std->students as $val)
+                        @foreach ($students as $val)
                             <tr class="align-middle">
                                 <th scope="row">{{ $i++ }}</th>
                                 <td>{{ $val->name }}</td>
@@ -39,8 +39,7 @@
                                 <td>{{ $std->std }}</td>
                                 <td>{{ $val->email }}</td>
                                 <td>{{ $val->mobile }}</td>
-                                <td>{{ $val->year }}</td>
-                        
+                                <td>{{ $val->year }}</td>   
                             </tr>
                         @endforeach
                     @else
@@ -54,8 +53,11 @@
                     @endif
                 </tbody>
             </table>
-  
-  
+            
+        </div>
+           <!-- Paginate -->
+           <div class="paginate-pro mt-5 text-center">
+            {{ $students->links() }}
         </div>
         </div>
       </div>

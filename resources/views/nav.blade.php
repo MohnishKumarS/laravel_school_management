@@ -20,6 +20,11 @@
         <li class="nav-item">
           <a class="nav-link {{Request::is('about-us') ? 'active' : ''}}" href="{{url('about-us')}}">AboutUs</a>
         </li>
+        @auth
+        <li class="nav-item">
+          <a class="nav-link {{Request::is('home') ? 'active' : ''}}" href="{{url('home')}}">Dashboard</a>
+        </li>
+        @endauth
         {{-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -33,7 +38,15 @@
         </li> --}}
       </ul>
       <div>
-        <a href="{{route('login')}}" class="btn-main">Login</a>
+        @auth
+        <a href="{{route('logout')}}" class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          @csrf
+      </form>
+            @else
+            <a href="{{route('login')}}" class="btn-main">Login</a>
+        @endauth
+       
       </div>
     </div>
   </div>
@@ -43,5 +56,9 @@
     color: #f0498c !important;
     font-weight: 600;
     letter-spacing: 1px
+  }
+  .nav-link:hover{
+    color: #f0498c !important;
+
   }
 </style>

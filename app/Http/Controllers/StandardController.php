@@ -22,6 +22,15 @@ class StandardController extends Controller
         ]);
     }
 
+    // update std
+    public function update_std(Request $req){
+        
+      $std =  Standard::findOrFail($req->id);
+      $std->update($req->all());
+      return redirect()->back()->with('status','success')->with('title','Standard updated successfully');
+      
+    }
+
     // delete std 
     public function delete_std($id){
         $data = Standard::findOrFail($id);

@@ -26,7 +26,7 @@
               <div class="left-section d-none d-lg-block">
                 <aside>
                     <p class="fw-bold"> OXFORD MANAGEMENT </p>
-                    <a href="{{url('/')}}" class="{{Request::is('home') ? 'active' : ''}}">
+                    <a href="{{url('/home')}}" class="{{Request::is('home') ? 'active' : ''}}">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         Home
                     </a>
@@ -53,6 +53,10 @@
                     <a href="{{url('/students')}}" class="{{Request::is('students') ? 'active' : ''}}">
                         <i class="fa-solid fa-children"></i>
                         Students
+                    </a>
+                    <a href="{{url('/admission-details')}}" class="{{Request::is('admission-details') ? 'active' : ''}}">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Admission Form
                     </a>
                 </aside>
               </div>

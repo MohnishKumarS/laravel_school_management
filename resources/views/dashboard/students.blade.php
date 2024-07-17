@@ -90,13 +90,26 @@
     </div>
 </form>
  </div>
- <h2 class="sec-title">students list</h2>
-      <div class="student-table">
 
-          <table class="table">
+ <h2 class="sec-title">students list</h2>
+ {{-- <div class="mb-3 w-25"> 
+    <div class="form-floating">
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <label for="floatingSelect">Works with selects</label>
+      </div>
+ </div> --}}
+      <div class="student-table table-responsive">
+
+          <table class="table table-hover table-bordered text-center">
               <thead>
                   <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Image</th>
                       <th scope="col">Name</th>
                       <th scope="col">Gender</th>
                       <th scope="col">Class</th>
@@ -108,13 +121,18 @@
               </thead>
               <tbody>
 
-                  @if ($student->count())
+                  @if ($students->count())
                       @php
                           $i = 1;
                       @endphp
-                      @foreach ($student as $val)
-                          <tr class="align-middle">
+                      @foreach ($students as $val)
+                          <tr class="align-middle ">
                               <th scope="row">{{ $i++ }}</th>
+                              <td>
+                                <div>
+                                    <img src="{{url('image/'.$val->gender.'.png')}}" alt="profile-photo" width="60" loading="lazy">
+                                </div>
+                              </td>
                               <td>{{ $val->name }}</td>
                               <td>{{ $val->gender }}</td>
                               <td>{{ $val->std->class }}</td>
@@ -123,10 +141,10 @@
                               <td>{{ $val->year }}</td>
                               <td>
                                   <div>
-                                      <a data-bs-toggle="modal" data-bs-target="#edit-student"
-                                          class="btn btn-primary">Edit</a>
+                                      {{-- <a data-bs-toggle="modal" data-bs-target="#edit-student"
+                                          class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a> --}}
                                       <a href="{{ URL::to('delete-student/' . $val->id) }}"
-                                          class="btn btn-danger">Delete</a>
+                                          class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
                                   </div>
                               </td>
                           </tr>
@@ -145,6 +163,10 @@
 
 
       </div>
+         <!-- Paginate -->
+         <div class="paginate-pro mt-5 text-center">
+            {{ $students->links() }}
+        </div>
   </div>
 </section>
 @endsection

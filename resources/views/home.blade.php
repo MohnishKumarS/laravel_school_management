@@ -1,91 +1,83 @@
 @extends('layouts.admin')
 
 @section('content')
-<section class="banners">
-    <h2 class="sec-title">Banners</h2>
-
+<section class="dash-home">
+    <h2 class="sec-title">Dashboard</h2>
+    <h2 class="mb-4">
+        Welcome <span class="text-main">{{Auth::user()->name}}</span>
+    </h2>
     <div class="block-wrap container">
-        <form action="{{ url('/add-banner') }}" method="post" enctype="multipart/form-data">
-            @csrf
+        <div class="dash-block container">
             <div class="row">
-                <div class="col">
-                    <div class="form-floating ">
-                        <input type="file" class="form-control" id="floatingInput"
-                            placeholder="Image" required name="image">
-                        <label for="floatingInput">Images</label>
+              <div class="col-lg-4 mb-4 ">
+                <div class="dash-item one">
+                  <div class="dash-item__title">
+                    Teachers
+                  </div>
+                  <div class="dash-item__sub">
+                    <div class="dash-item__count">
+                      {{$teacher}}
                     </div>
-                    @error('image')
-                    <div class="text-danger"><small>{{ $message }}</small></div>
-                @enderror
-                </div>
-                <div class="col">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" required name="time">
-                            <option selected value="">Choose</option>
-                            <option value="1000">1 second</option>
-                            <option value="2000">2 second</option>
-                            <option value="3000">3 second</option>
-                            <option value="4000">4 second</option>
-                            <option value="5000">5 second</option>
-                        </select>
-                        <label for="floatingSelect">Autoplay (seconds)</label>
+                    <div class="dash-item-icon">
+                        <i class="fa-solid fa-person-chalkboard"></i>
                     </div>
-                    @error('time')
-                    <div class="text-danger"><small>{{ $message }}</small></div>
-                @enderror
+                  </div>
                 </div>
+              </div>
+              <div class="col-lg-4 mb-4">
+                <div class="dash-item two">
+                  <div class="dash-item__title">
+                    Students
+                  </div>
+                  <div class="dash-item__sub">
+                    <div class="dash-item__count">
+                        {{$students}}
+                    </div>
+                    <div class="dash-item-icon">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+      
+                  </div>
+      
+                </div>
+              </div>
+              <div class="col-lg-4 mb-4">
+                <div class="dash-item three">
+                  <div class="dash-item__title">
+                    Admission
+                  </div>
+                  <div class="dash-item__sub">
+                    <div class="dash-item__count">
+                        {{$admission}}
+                    </div>
+                    <div class="dash-item-icon">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+      
+                  </div>
+      
+                </div>
+              </div>
+              <div class="col-lg-4 mb-4">
+                <div class="dash-item four">
+                  <div class="dash-item__title">
+                    Classes
+                  </div>
+                  <div class="dash-item__sub">
+                    <div class="dash-item__count">
+                        {{$std}}
+                    </div>
+                    <div class="dash-item-icon">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+      
+                  </div>
+      
+                </div>
+              </div>
+      
             </div>
-            <div class="btn-wrap my-3 text-center">
-                <button class="btn btn-success w-25" type='submit'>Submit</button>
-            </div>
-        </form>
-
-        <div class="banner-table">
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($banner->count())
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($banner as $val)
-                    <tr class="align-middle">
-                        <th scope="row">{{$i++}}</th>
-                        <td><img src="image/banners/{{$val->image}}" height="150" class="object-fit-cover" alt=""></td>
-                        <td>{{ $val->time / 1000  }} sec</td>
-                        <td>
-                            <div>
-                                {{-- <a data-bs-toggle="modal" data-bs-target="#edit-banner"
-                                    class="btn btn-primary">Edit</a> --}}
-                                <a href="{{ URL::to('delete-banner/' . $val->id) }}"
-                                    class="btn btn-danger">Delete <i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-          
-                    @else
-                        <tr>
-                            <td colspan="4">
-                                <div class="text-danger text-center py-5">
-                                    No data found !
-                                </div>
-                            </td>
-                        </tr>
-                    @endif
-                </tbody>
-            </table>
-
-
-        </div>
+          </div>
     </div>
 </section>
 

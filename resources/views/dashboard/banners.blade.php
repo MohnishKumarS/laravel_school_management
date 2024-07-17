@@ -44,9 +44,9 @@
 
 
         <h2 class="sec-title">Banners List</h2>
-        <div class="banner-table">
+        <div class="banner-table table-responsive">
 
-            <table class="table">
+            <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -70,7 +70,7 @@
                                 {{-- <a data-bs-toggle="modal" data-bs-target="#edit-banner"
                                     class="btn btn-primary">Edit</a> --}}
                                 <a href="{{ URL::to('delete-banner/' . $val->id) }}"
-                                    class="btn btn-danger">Delete <i class="bi bi-trash"></i></a>
+                                    class="btn btn-outline-danger">Delete <i class="bi bi-trash"></i></a>
                             </div>
                         </td>
                     </tr>

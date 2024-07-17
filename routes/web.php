@@ -25,10 +25,13 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [HomeController::Class,'index']);
 Route::get('/about-us', [HomeController::Class,'about_us']);
 Route::get('/admission', [HomeController::Class,'admission']);
+Route::get('/notice-board', [HomeController::Class,'notice_board']);
 Route::get('std-details/{id}',[HomeController::Class,'std_details']);
 
 
 Route::controller(DashboardController::class)->group(function(){
+
+    Route::get('admission-details','showAdmission');
     Route::get('banners','showBanners');
     Route::get('news','showNews');
     Route::get('quotes','showQuotes');
@@ -58,6 +61,7 @@ Route::controller(StudentController::class)->group(function(){
 });
 Route::controller(StandardController::class)->group(function(){
     Route::post('add-std','add_std');
+    Route::put('update-std','update_std');
     Route::get('delete-std/{id}','delete_std');
 });
 Route::controller(BannerController::Class)->group(function(){
@@ -73,3 +77,22 @@ Route::controller(AdmissionController::Class)->group(function(){
 Auth::routes();
 
 Route::get('/home', [DashboardController::class, 'dashboard'])->name('home');
+
+
+Route::get('/clear', function() {
+   
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('optimize');
+ 
+    return "Cleared!";
+ 
+ });
+ 
+ 
+ Route::fallback(function () {
+    return view('404');
+ });
+ 

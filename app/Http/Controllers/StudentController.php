@@ -24,4 +24,21 @@ class StudentController extends Controller
             ]);
         }
     }
+
+    // delete student
+    public function delete_student($id){
+        $data = Student::findOrFail($id);
+
+       if ($data->delete()) {
+        return redirect()->back()->with([
+            'status' => 'success',
+            'title' => 'Student deleted successfully'
+        ]);
+       }else{
+        return redirect()->back()->with([
+            'status' => 'error',
+            'title' => 'Something went wrong while deleting student'
+        ]);
+       }
+    }
 }

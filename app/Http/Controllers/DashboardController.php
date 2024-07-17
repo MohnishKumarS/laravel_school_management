@@ -8,17 +8,37 @@ use App\Models\Banner;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Standard;
+use App\Models\Admission;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function dashboard(){
-        $banner = Banner::all();
-        $news = News::first();
-        $quote = Quote::first();
-        $teacher = Teacher::all();
-        $std = Standard::all();
-        return view('home',compact('banner','news','quote','teacher','std'));
+        $teacher = Teacher::count();
+        $std = Standard::count();
+        $students = Student::count();
+        $admission = Admission::count();
+        return view('home',compact('students','teacher','std','admission'));
+    }
+
+    public function showAdmission(){
+        $admission = Admission::latest()->get();
+        return view('dashboard.admission',compact('admission'));
     }
 
     public function showBanners(){
@@ -45,8 +65,7 @@ class DashboardController extends Controller
     }
     public function showStudents(){
         $std = Standard::all();
-        $teacher = Teacher::all();
-        $student = Student::all();
-        return view('dashboard.students',compact('std','student'));
+        $students = Student::paginate(10);
+        return view('dashboard.students',compact('std','students'));
     }
 }

@@ -60,9 +60,9 @@
                 </form>
             </div>
             <h2 class="sec-title">Teachers list</h2>
-            <div class="teacher-table">
+            <div class="teacher-table table-responsive">
 
-                <table class="table">
+                <table class="table table-hover table-bordered ">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -92,9 +92,9 @@
                                                 data-id="{{ $val->id }}" data-name="{{ $val->name }}"
                                                 data-gender="{{ $val->gender }}" data-role="{{ $val->role }}"
                                                 data-date="{{ $val->joined_at }}"
-                                                class="btn btn-primary edit-teacher-btn">Edit</a>
+                                                class="btn btn-outline-primary edit-teacher-btn"><i class="bi bi-pencil-square"></i></a>
                                             <a href="{{ URL::to('delete-teacher/' . $val->id) }}"
-                                                class="btn btn-danger">Delete</a>
+                                                class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -156,7 +156,7 @@
                             <div class="col-12 mb-4">
                                 <div class="form-floating ">
                                     <input type="text" class="form-control" id="teacher-name"
-                                        placeholder="Name of the staff" name="name">
+                                        placeholder="Name of the staff" name="name" required>
                                     <label for="floatingInput">Name</label>
                                 </div>
 
@@ -164,7 +164,7 @@
                             <div class="col-12 mb-4">
                                 <div class="form-floating">
                                     <select class="form-select" id="teacher-gender"
-                                        aria-label="Floating label select example" name="gender">
+                                        aria-label="Floating label select example" name="gender" required>
                                         <option selected value="">Choose</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -176,7 +176,7 @@
                             <div class="col-12 mb-4">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="teacher-role" placeholder="Role"
-                                        name="role">
+                                        name="role" required>
                                     <label for="floatingPassword">Subject <small>(ex:Maths)</small></label>
                                 </div>
 
@@ -184,7 +184,7 @@
                             <div class="col-12 mb-4">
                                 <div class="form-floating">
                                     <input type="date" class="form-control" id="teacher-date"
-                                        placeholder="Date of joning" name="joined_at">
+                                        placeholder="Date of joning" name="joined_at" required>
                                     <label for="floatingPassword">Date of joning</label>
                                 </div>
 

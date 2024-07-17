@@ -37,9 +37,9 @@
     </form>
      </div>
      <h2 class="sec-title">Thought of the day</h2>
-      <div class="quote-table">
+      <div class="quote-table table-responsive">
 
-          <table class="table">
+          <table class="table table-hover table-bordered">
               <thead>
                   <tr>
                       <th scope="col">#</th>
@@ -57,9 +57,9 @@
                           <td>
                               <div>
                                   <a data-bs-toggle="modal" data-bs-target="#edit-quote"
-                                      class="btn btn-primary">Edit</a>
+                                      class="btn btn-outline-primary">Edit</a>
                                   <a href="{{ URL::to('delete-quote/' . $quote->id) }}"
-                                      class="btn btn-danger">Delete</a>
+                                      class="btn btn-outline-danger">Delete</a>
                               </div>
                           </td>
                       </tr>

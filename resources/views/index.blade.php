@@ -94,7 +94,7 @@
                     <a href="{{url('std-details/2')}}">
                       <div class="std-item">
                         <div class="std-block__icon">
-                          <img src="https://img.icons8.com/?size=100&id=K2tDfCBeUCPR&format=png&color=000000" alt="">
+                          <img src="https://img.icons8.com/?size=100&id=K2tDfCBeUCPR&format=png&color=000000" alt="classes" loading="lazy">
                         </div>
                         <div class="std-block__title">
                           <h3>Class 10</h3>
@@ -106,7 +106,7 @@
                     <a href="{{url('std-details/3')}}">
                       <div class="std-item">
                         <div class="std-block__icon">
-                          <img src="https://img.icons8.com/?size=100&id=D5JkHSDonyLY&format=png&color=000000" alt="">
+                          <img src="https://img.icons8.com/?size=100&id=D5JkHSDonyLY&format=png&color=000000" alt="classes" loading="lazy">
                         </div>
                         <div class="std-block__title">
                           <h3>Class 11</h3>
@@ -118,7 +118,7 @@
                     <a href="{{url('std-details/4')}}">
                       <div class="std-item">
                         <div class="std-block__icon">
-                          <img src="https://img.icons8.com/?size=100&id=g0hFAy7X4Ef7&format=png&color=000000" alt="">
+                          <img src="https://img.icons8.com/?size=100&id=g0hFAy7X4Ef7&format=png&color=000000" alt="classes" loading="lazy">
                         </div>
                         <div class="std-block__title">
                           <h3>Class 12</h3>
@@ -141,7 +141,7 @@
                     <div class="swiper-slide">
                         <div class="teacher-item">
                           <div class="teacher-block__icon">
-                            <img src="{{url('image/'.$val->gender.'.png')}}" alt="avatar-icon">
+                            <img src="{{url('image/'.$val->gender.'.png')}}" alt="avatar-icon" loading="lazy">
                           </div>
                           <div class="teacher-block__title">
                             <h3>{{$val->name}}</h3>
